@@ -4,47 +4,37 @@ const router = express.Router()
 //Item Model
 const Product = require('../../models/product')
 
-router.get('/', (req, res) => {
-    Product.find()
-    .then(product => res.json(product))
-    .catch(err => res.json({status: err}))
+router.get('/', async (req, res) => {
+    const products = await Product.find()
+    res.json(products)
 })
 
-router.get('/:id', (req, res) => {
-    Product.findById(req.params.id)
-    .then(product => res.json(product))
-    .catch(err => res.json({status: err}))
-    
+router.get('/:id', async (req, res) => {
+    const product = await Product.findById(req.params.id)
+    res.json(product)
 })
 
-router.post('/', (req, res) => {
-    const newProduct = new Product({
-        name: req.body.name,
-        price: req.body.price,
-        type: req.body.type
-    })
-    newProduct.save()
-    .then(producto => res.json(producto))
-    .catch(err => res.json({status: err}))
+router.post('/', async (req, res) => {
+    const { name, price, type } = req.body
+    await new Product({
+        name,
+        price,
+        type
+    }).save()
+
+    res.json({ status: 'Producto guardado' })
 })
 
-router.put('/:id', (req, res) => {
-    Product.findById(req.params.id)
-    .then(product => product.update({
-        name: req.body.name,
-        price: req.body.price,
-        type: req.body.type
-    }).then(
-        res.json({status: "Updated"})
-    ).catch(res.json({status: "Not updated"}))
-    ).catch(res.json({status: "Not updated"}))
-    
+router.put('/:id', async (req, res) => {
+    const { name, price, type } = req.body
+    const newProduct = { name, price, type }
+    await Product.findByIdAndUpdate(req.params.id, newProduct)
+    res.json({ status: 'Producto Actualizado' })
 })
 
-router.delete('/:id', (req, res) => {
-    Product.findById(req.params.id)
-    .then(product => product.remove().then(()=>res.json({status: 'Producto eliminado'})))
-    .catch(err => res.json({status: 'No se ha podido eliminar'}))
+router.delete('/:id', async (req, res) => {
+    await Product.findByIdAndRemove(req.params.id)
+    res.json({ status: 'Producto eliminado' })
 })
 
 module.exports = router
