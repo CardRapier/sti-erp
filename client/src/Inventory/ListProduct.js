@@ -9,20 +9,24 @@ class ListProduct extends Component {
     constructor() {
         super()
         this.state = {
-            product: {}
+            productMostrar: {}
         }
+        this.PreparateData = this.PreparateData.bind(this)
     }
-
-    componentWillMount() {
+    static propTypes = {
+        getProducts: PropTypes.func.isRequired,
+        product: PropTypes.object.isRequired
+    }
+    componentDidMount() {
         this.props.getProducts()
-        var { products } = this.props.product
-        this.PreparateData(products)
+        //this.PreparateData(products)
+        //console.log(this.state.productMostrar + "Producto Mostrar")
     }
 
     PreparateData(products) {
-        for (var i in products) {
-            products[i]['actions'] = <div><MDBContainer><MDBRow><ModalModify id={products[i]['_id']}/> <MDBBtn color="indigo" size="sm" id={products[i]['_id']}><MDBIcon icon="trash" /></MDBBtn></MDBRow></MDBContainer></div>
-
+        /**
+        for (var i in products){
+            //products[i]['actions'] = '<div><MDBContainer><MDBRow><ModalModify id={m[i]["_id"]}/> <MDBBtn color="indigo" size="sm" id={m[i]["_id"]}><MDBIcon icon="trash" /></MDBBtn></MDBRow></MDBContainer></div>'
             delete products[i]['_id']
             delete products[i]['__v']
         }
@@ -48,17 +52,48 @@ class ListProduct extends Component {
                     label: 'Actions',
                     field: 'actions',
                     sort: 'asc'
-                  }
+                  } 
             ],
             rows: products
         }
 
-        this.setState(() => ({
-            product: data
-        }))
+        this.setState({
+            productMostrar: data
+        })*/
     }
 
     render () {
+        const { products } = this.props.product
+        for (var i in products){
+            delete products[i]['_id']
+            delete products[i]['__v']
+        }
+        const data = {
+            columns: [
+                  {
+                    label: 'Name',
+                    field: 'name',
+                    sort: 'asc'
+                  },
+                  {
+                    label: 'Precio',
+                    field: 'price',
+                    sort: 'asc'
+                  },
+                  {
+                    label: 'Tipo',
+                    field: 'type',
+                    sort: 'asc'
+                  }/**,
+                  {
+                    label: 'Actions',
+                    field: 'actions',
+                    sort: 'asc'
+                  }  */
+            ],
+            rows: products
+            
+        }
         return(
             <div>
             <MDBDataTable
@@ -67,19 +102,16 @@ class ListProduct extends Component {
                 hover 
                 small
                 fixed
-                data={this.state.product}
+                data={data}
             />
             </div>
         )
     }
 }
 
-ListProduct.propTypes = {
-    getProducts: PropTypes.func.isRequired,
-    product: PropTypes.object.isRequired
-}
 
-const mapStateToProps = (state) => ({
+
+const mapStateToProps = state => ({
     product: state.product
 }) 
 

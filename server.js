@@ -11,8 +11,8 @@ app.set('port', process.env.PORT || 33000)
 app.use(express.json())
 
 //Routes
-const products = require('./routes/api/product.routes')
-app.use('/api/products', products)
+const product = require('./routes/api/product.routes')
+app.use('/api/products', product)
 
 //Static Files
 app.use(express.static(path.join(__dirname, 'public')))
