@@ -1,8 +1,9 @@
 const express = require('express')
 const router = express.Router()
 
-//Item Model
+//Product Model
 const Product = require('../../models/product')
+
 router.get('/',  (req, res) => {
     Product.find().then(products => res.json(products))
 })

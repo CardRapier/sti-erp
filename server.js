@@ -13,6 +13,11 @@ app.use(express.json())
 //Routes
 const product = require('./routes/api/product.routes')
 app.use('/api/products', product)
+const storage = require('./routes/api/storage.routes')
+app.use('/api/storages', storage)
+const user = require('./routes/api/user.routes')
+app.use('/api/users', user)
+
 
 //Static Files
 app.use(express.static(path.join(__dirname, 'public')))
