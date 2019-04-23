@@ -6,6 +6,7 @@ import Entrance from './Entrance'
 import { MDBContainer } from 'mdbreact'
 import ListProduct from './ListProduct'
 import Movement from './Movement'
+import Transfer from "./Transfer"
 
 
 class Inventory extends Component {
@@ -21,7 +22,7 @@ class Inventory extends Component {
         if(name === 'Agregar') {this.setState({app: <Add /> })}
         else if(name === 'Lista') {this.setState({app: <ListProduct />})}
         else if(name === 'Movimiento') {this.setState({app: <Movement />})}
-        else if(name === 'Translado') {this.setState({app: <Entrance />})}
+        else if(name === 'Translado') {this.setState({app: <Transfer />})}
         else {this.setState({app: <List /> })}
     }
 

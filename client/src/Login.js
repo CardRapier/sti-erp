@@ -64,16 +64,17 @@ class Login extends Component{
                 <p className="h5 text-center mb-4">Sign in</p>
                 <div className="grey-text">
                     <MDBInput
-                      label="Email"
+                      label="Documento"
                       icon="envelope"
                       group
-                      type="email"
+                      type="number"
+                      min="1"
                       validate
                       error="wrong"
                       success="right"
                     />
                     <MDBInput
-                      label="Password"
+                      label="Contraseña"
                       icon="lock"
                       group
                       type="password"

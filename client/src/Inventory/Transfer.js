@@ -2,20 +2,33 @@ import React, { Component } from 'react'
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import Select from 'react-select';
 
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
+const optionsStorage = [
+    { value: 'bodega1', label: 'Bodega 1' },
+    { value: 'bodega2', label: 'Bodega 2' },
+    { value: 'bodega3', label: 'Bodega 3' }
   ];
 
-class Movement extends Component {
+  const options = [
+    { value: 'chocolate', label: 'chocolate' },
+    { value: 'strawberry', label: 'strawberry' },
+    { value: 'vanilla', label: 'vanilla' }
+  ];
+
+
+class Transfer extends Component {
     state = {
-        selectedOption: null,
+        selectedStorage: null,
+        selectedOption: null
+      }
+
+      handleChangeStorage = (selectedStorage) => {
+        this.setState({ selectedStorage });
       }
 
       handleChange = (selectedOption) => {
         this.setState({ selectedOption });
       }
+
     render() {
         return (
             <MDBContainer>
@@ -25,30 +38,18 @@ class Movement extends Component {
                   <MDBCard>
                     <MDBCardBody>
                       <form>
-                        <p className="h4 text-center py-4">Movimiento</p>
+                        <p className="h4 text-center py-4">Translado</p>
                         <label
                           htmlFor="defaultFormCardNameEx"
                           className="grey-text font-weight-light"
                         >
-                          Tercero
+                          Bodega
                         </label>
                         <Select
-                              value={this.state.selectedOption}
-                              onChange={this.handleChange}
-                              options={options}
+                              value={this.state.selectedStorage}
+                              onChange={this.handleChangeStorage}
+                              options={optionsStorage}
                           />
-                        <br />
-                        <label
-                          htmlFor="defaultFormCardEmailEx"
-                          className="grey-text font-weight-light"
-                        >
-                          Tipo de operacion
-                        </label>
-                        <select className="browser-default custom-select">
-                          <option>Escoja la operacion</option>
-                          <option value="1">Entrada</option>
-                          <option value="2">Salida</option>
-                        </select>
                         <MDBTable striped>
                         <MDBTableHead>
                             <tr>
@@ -69,7 +70,6 @@ class Movement extends Component {
                                 <input></input>
                             </td>
                             </tr>
-                            
                         </MDBTableBody>
                         </MDBTable>                    
                         <div className="text-center py-4 mt-3">
@@ -90,4 +90,4 @@ class Movement extends Component {
     }
   };
 
-export default Movement
+export default Transfer
