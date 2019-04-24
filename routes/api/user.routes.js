@@ -5,7 +5,7 @@ const router = express.Router()
 
 const User = require('../../models/user')
 
-router.get('/',(res,res) =>{
+router.get('/',(req,res) =>{
     User.find().then(users => res.json(users))
 })
 
@@ -14,8 +14,9 @@ router.get('/:id', async (req, res) => {
     res.json(user)
 })
 
-router.get('/login/:document', (res,req) => {
-    User.findOne({document:req.params.document}).then(user => res.json(user))
+router.post('/login', (req,res) => {
+    const { document, password } = req.body; 
+    User.findOne({document: document,password:password}).then(user => res.json(user))
 })
 
 router.post('/', async (req, res) => {

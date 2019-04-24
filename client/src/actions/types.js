@@ -2,3 +2,12 @@ export const GET_PRODUCTS = 'GET_PRODUCTS'
 export const ADD_PRODUCTS = 'ADD_PRODUCTS'
 export const DELETE_PRODUCTS = 'DELETE_PRODUCTS'
 export const LOADING_PRODUCTS = 'LOADING_PRODUCTS'
+
+export const GET_USERS = 'GET_USERS'
+export const GET_USER = 'GET_USER'
+export const ADD_USER = 'ADD_USER'
+export const LOADING_USERS = 'LOADING_USERS'
+
+export const GET_STORAGES = 'GET_STORAGES'
+export const ADD_STORAGE = 'ADD_STORAGE'
+export const LOADING_STORAGES = 'LOADING_STORAGES'

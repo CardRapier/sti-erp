@@ -1,6 +1,10 @@
 import React, { Component } from "react"
 import { MDBContainer, MDBRow, MDBInput, MDBBtn, MDBCol,toast,ToastContainer} from "mdbreact";
 import Recaptcha from "react-recaptcha"
+import { connect } from 'react-redux'
+import { getUser } from './actions/userActions'
+
+
 
 class Login extends Component{
     constructor(props){
@@ -10,26 +14,46 @@ class Login extends Component{
         this.expiredCallback = this.expiredCallback.bind(this)
         
         this.state = {
-            captchaVerified: true
+            captchaVerified: false,
+            document: "",
+            password: "" 
         }
     }
-
+    onChange = e => {
+        this.setState({ [e.target.name]: e.target.value });
+    };
     handleCaptchaVerified(){
         return () => {
-            if(this.state.captchaVerified){
-                localStorage.setItem('user','user')
-                localStorage.setItem('rol','rol')
-                this.props.handleAppChange(this.props.name)
+            if(this.state.captchaVerified && this.state.document!=""&&this.state.password!=""){
+                const { document, password } = this.state;
+                const usere = {
+                    document,
+                    password
+                }
+                this.props.getUser(usere)
+                setTimeout("location.reload(true);",1500);
+                
             }else{
-                return toast.error('Error en el login', {
+                return toast.error('Verifique todos los campos', {
                     position: "top-right",
                 });
             }
         };
     };
 
+    verifyLocalStorage(){
+        if(localStorage.getItem('user')){
+            toast.error('Login correcto', {
+                position: "top-right",
+            }); 
+        }else{
+            toast.error('Error en el login', {
+                position: "top-right",
+            });
+        }
+    }
     callback = function () {
-        console.log('Captcha Done!!!!');
+        console.log("Captcha Done!")
     };
 
     verifyCallback(response){
@@ -41,7 +65,6 @@ class Login extends Component{
     }
 
     expiredCallback(response){
-        console.log("alert")
         if(response){
             this.setState({
                 captchaVerified: false
@@ -61,24 +84,28 @@ class Login extends Component{
             />
             <MDBCol size="4">
                 <form className="mt-5">
-                <p className="h5 text-center mb-4">Sign in</p>
+                <p className="h5 text-center mb-4">Ingresar</p>
                 <div className="grey-text">
                     <MDBInput
                       label="Documento"
                       icon="envelope"
                       group
+                      name="document"
                       type="number"
                       min="1"
                       validate
                       error="wrong"
                       success="right"
+                      onChange={this.onChange}
                     />
                     <MDBInput
                       label="Contraseña"
                       icon="lock"
                       group
+                      name="password"
                       type="password"
                       validate
+                      onChange={this.onChange}
                     />
                 </div>
                 <div className="mt-5 mb-5">
@@ -87,7 +114,6 @@ class Login extends Component{
                         render="explicit"
                         onloadCallback={this.callback}
                         verifyCallback={this.verifyCallback}
-                        expiredCallback={this.expiredCallback}
                     />
                 </div>
                 <div className="text-center">
@@ -103,4 +129,8 @@ class Login extends Component{
 
 }
 
-export default Login
+const mapStateToProps = state => ({
+    user: state.user
+}) 
+
+export default connect(mapStateToProps, { getUser })(Login)

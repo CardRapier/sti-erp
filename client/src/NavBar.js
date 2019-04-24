@@ -20,7 +20,8 @@ class FullPageIntroWithFixedNavbar extends React.Component {
 
   handleLogout() {
     localStorage.removeItem('user')
-    localStorage.removeItem('rol')
+    localStorage.removeItem('role')
+    localStorage.removeItem('document')
     this.props.handleAppChange('Login')
   }
 
