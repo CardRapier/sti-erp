@@ -6,8 +6,8 @@ import { getStorages } from '../actions/storageActions'
 import PropTypes from 'prop-types'
 
 class SelectStorage extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             selectedStorage: null
         }
@@ -25,6 +25,7 @@ class SelectStorage extends Component {
 
     handleChangeStorage = (selectedStorage) => {
         this.setState({ selectedStorage });
+        localStorage.setItem('storage', selectedStorage._id)
     }
 
     render() {
@@ -33,7 +34,7 @@ class SelectStorage extends Component {
             storages[i]['label'] =  storages[i]['name'] + " - " +storages[i]['direction']
             storages[i]['value'] =  storages[i]['name'] + " - " + storages[i]['direction']
         }
-
+        
         return (
             <div>
                 <Select
@@ -42,7 +43,7 @@ class SelectStorage extends Component {
                     options={storages}
                 />
 
-                {this.props.buttonName !== "" ? <MDBBtn color="indigo">{this.props.buttonName}</MDBBtn> : ""}
+                {this.props.buttonName !== "" ? <MDBBtn name="List" onClick={this.props.handleAppChange} color="indigo">{this.props.buttonName}</MDBBtn> : ""}
             </div>
             
         )

@@ -1,12 +1,23 @@
 import axios from 'axios'
-import { GET_STORAGES, ADD_STORAGE, LOADING_STORAGES } from './types'
+import { GET_STORAGES, ADD_STORAGE, LOADING_STORAGES, GET_STORAGE_PRODUCTS } from './types'
 
 export const getStorages = () => dispatch => {
     dispatch(setStoragesLoading())
-    axios.get('/api/storages')
+    axios.get('/api/storages/user/' + localStorage.getItem('_id'))
     .then(res => 
         dispatch({
             type: GET_STORAGES,
+            payload: res.data
+        })
+    )
+}
+
+export const getStoragesProducts = () => dispatch => {
+    dispatch(setStoragesLoading())
+    axios.get('/api/storages/' + localStorage.getItem('storage'))
+    .then(res => 
+        dispatch({
+            type: GET_STORAGE_PRODUCTS,
             payload: res.data
         })
     )

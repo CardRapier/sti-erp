@@ -1,15 +1,20 @@
 const express = require('express')
 const router = express.Router()
+const ObjectId = require('mongoose').Types.ObjectId; 
 
 const Storage = require('../../models/storage')
+console.log(Storage.modelName)
 
 router.get('/',  (req, res) => {
     Storage.find().then(storage => res.json(storage))
 })
 
+router.get('/user/:id',  (req, res) => {
+    Storage.find({ 'users': ObjectId(req.params.id) }).then(storage => res.json(storage))
+})
+
 router.get('/:id', async (req, res) => {
-    const storage = await Storage.findById(req.params.id)
-    res.json(storage)
+    Storage.find({_id:ObjectId(req.params.id)}).then(storage => res.json(storage))
 })
 
 router.post('/', async (req, res) => {

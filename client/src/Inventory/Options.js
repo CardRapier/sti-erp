@@ -2,9 +2,9 @@ import React from 'react'
 import { MDBRow, MDBCol, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
 import SelectStorage from './SelectStorage';
 
-function SelectPage() {
+function SelectPage(props) {
     return(
-          <SelectStorage buttonName="Cambiar Bodega"/>
+          <SelectStorage handleAppChange={props.handleAppChange} buttonName="Cambiar Bodega"/>
     )
 }
 
@@ -28,7 +28,7 @@ function Options(props) {
         <div>
               <br />
                 <MDBRow>
-                    <MDBCol><SelectPage /></MDBCol>
+                    <MDBCol><SelectPage handleAppChange={props.handleAppChange} /></MDBCol>
                     <DropdownPage name="Suministros" opciones={{ first:"Agregar", second:"Lista"}} handleAppChange={props.handleAppChange}/>
                     <DropdownPage name="Registrar Movimientos" opciones={{ first:"Movimiento", second:"Translado"}} handleAppChange={props.handleAppChange}/>
                 </MDBRow>

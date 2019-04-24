@@ -16,6 +16,7 @@ export default function( state = initialState, action ) {
         case GET_USER:
             if(action.payload){
                 localStorage.setItem('document',action.payload.document)
+                localStorage.setItem('_id', action.payload._id)
                 localStorage.setItem('user',action.payload.name)
                 localStorage.setItem('role',action.payload.role)
             }

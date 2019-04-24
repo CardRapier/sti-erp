@@ -8,9 +8,6 @@ import PropTypes from 'prop-types'
 class ListProduct extends Component {
     constructor() {
         super()
-        this.state = {
-            productMostrar: {}
-        }
     }
 
     static propTypes = {
@@ -27,7 +24,6 @@ class ListProduct extends Component {
         for (var i in products){
             products[i]['actions'] = <div><MDBContainer><MDBRow><ModalModify id={products[i]["_id"]}/> <MDBBtn color="indigo" size="sm" id={products[i]["_id"]}><MDBIcon icon="trash" /></MDBBtn></MDBRow></MDBContainer></div>
             delete products[i]['_id']
-            delete products[i]['__v']
         }
 
         const data = {
@@ -53,7 +49,7 @@ class ListProduct extends Component {
                     sort: 'asc'
                   } 
             ],
-            
+
             rows: products
         }
 
@@ -75,4 +71,3 @@ const mapStateToProps = state => ({
 }) 
 
 export default connect(mapStateToProps, { getProducts })(ListProduct)
-//export default ListProduct

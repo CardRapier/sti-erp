@@ -49,10 +49,22 @@ class Add extends React.Component {
                 <form onSubmit={this.onSubmit}>
                   <p className="h4 text-center py-4">Suministro</p>
                   <label
+                    htmlFor="type"
+                    className="grey-text font-weight-light"
+                  >
+                    Tipo
+                  </label>
+                  <select onChange={this.onChange} name="type" id="type" className="browser-default custom-select">
+                    <option value="Producto">Producto</option>
+                    <option value="Insumo">Insumo</option>
+                  </select>
+                  <br />
+                  <br />
+                  <label
                     htmlFor="name"
                     className="grey-text font-weight-light"
                   >
-                    Nombre del Suministro
+                    Nombre
                   </label>
                   <input
                     type="text"
@@ -66,7 +78,7 @@ class Add extends React.Component {
                     htmlFor="price"
                     className="grey-text font-weight-light"
                   >
-                    Precio
+                    {this.state.type == "Producto" ? "Precio" : "Costo"}
                   </label>
                   <input
                     type="number"
@@ -75,23 +87,11 @@ class Add extends React.Component {
                     className="form-control"
                     onChange={this.onChange}
                   />
-  
-                  <br />
-                  <label
-                    htmlFor="type"
-                    className="grey-text font-weight-light"
-                  >
-                    Tipo de Suministro
-                  </label>
-                  <select onChange={this.onChange} name="type" id="type" className="browser-default custom-select">
-                    <option value="Producto">Producto</option>
-                    <option value="Insumo">Insumo</option>
-                  </select>
                   <div className="text-center py-4 mt-3">
                     <MDBBtn color="indigo" className="white-text" type="submit">
                       Agregar
                     </MDBBtn>
-                    <MDBBtn color="indigo" className="white-text">
+                    <MDBBtn name='Entrace' onClick={this.props.handleAppChange} color="indigo" className="white-text">
                       Cancelar
                     </MDBBtn>
                   </div>

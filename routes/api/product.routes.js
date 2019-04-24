@@ -1,11 +1,12 @@
 const express = require('express')
+const mongoose = require('mongoose')
 const router = express.Router()
 
 //Product Model
 const Product = require('../../models/product')
 
 router.get('/',  (req, res) => {
-    Product.find().then(products => res.json(products))
+    Product.find().select('-__v').then(products => res.json(products))
 })
 
 router.get('/:id', async (req, res) => {
@@ -16,6 +17,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     const { name, price, type } = req.body
     await new Product({
+        _id: new mongoose.Types.ObjectId(),
         name,
         price,
         type

@@ -1,7 +1,8 @@
-import {GET_STORAGES,ADD_STORAGE,LOADING_STORAGES} from '../actions/types'
+import { GET_STORAGES,ADD_STORAGE,LOADING_STORAGES, GET_STORAGE_PRODUCTS } from '../actions/types'
 
 const initialState = {
     storages: [],
+    storage_products: [],
     loading: false
 }
 
@@ -18,11 +19,17 @@ export default function( state = initialState, action ) {
                 ...state,
                 storages: [action.payload, ...state.storages] 
             }
-        case LOADING_STORAGES:
+        case GET_STORAGE_PRODUCTS:
             return {
                 ...state,
-                loading: true
+                storage_products: action.payload,
+                loading: false
             }
+        case LOADING_STORAGES:
+        return {
+            ...state,
+            loading: true
+        }
         default:
             return state
     }
