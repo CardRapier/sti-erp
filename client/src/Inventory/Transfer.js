@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody, MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 import Select from 'react-select';
+import SelectedStorage from './SelectStorage'
 
 const optionsStorage = [
     { value: 'bodega1', label: 'Bodega 1' },
@@ -45,11 +46,7 @@ class Transfer extends Component {
                         >
                           Bodega
                         </label>
-                        <Select
-                              value={this.state.selectedStorage}
-                              onChange={this.handleChangeStorage}
-                              options={optionsStorage}
-                          />
+                        <SelectedStorage buttonName=""/>
                         <MDBTable striped>
                         <MDBTableHead>
                             <tr>

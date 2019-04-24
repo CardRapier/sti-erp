@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Options from './Options'
 import List from './List'
 import Add from './Add'
-import Entrance from './Entrance'
+import Entrace from './Entrance'
 import { MDBContainer } from 'mdbreact'
 import ListProduct from './ListProduct'
 import Movement from './Movement'
@@ -13,7 +13,7 @@ class Inventory extends Component {
     constructor() {
         super()
         this.state = {
-            app: <List />
+            app: <Entrace />
         }
     }
 

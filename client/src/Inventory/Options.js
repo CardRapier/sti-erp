@@ -1,15 +1,10 @@
 import React from 'react'
-import { MDBBtn, MDBRow, MDBCol, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
+import { MDBRow, MDBCol, MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
+import SelectStorage from './SelectStorage';
 
 function SelectPage() {
     return(
-      <div>
-        <select className="browser-default custom-select">
-          <option>Escoja la Bodega</option>
-          <option value="1">Bodega 1</option>
-        </select>
-          <MDBBtn color="indigo">Cambiar Bodega</MDBBtn>
-      </div>
+          <SelectStorage buttonName="Cambiar Bodega"/>
     )
 }
 

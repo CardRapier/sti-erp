@@ -1,7 +1,7 @@
 import axios from 'axios'
-import {GET_STORAGES,ADD_STORAGE,LOADING_STORAGES} from './types'
+import { GET_STORAGES, ADD_STORAGE, LOADING_STORAGES } from './types'
 
-export const getStorage = () => dispatch => {
+export const getStorages = () => dispatch => {
     dispatch(setStoragesLoading())
     axios.get('/api/storages')
     .then(res => 

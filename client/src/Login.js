@@ -24,13 +24,13 @@ class Login extends Component{
     };
     handleCaptchaVerified(){
         return () => {
-            if(this.state.captchaVerified && this.state.document!=""&&this.state.password!=""){
+            if(this.state.captchaVerified && this.state.document!==""&&this.state.password!==""){
                 const { document, password } = this.state;
-                const usere = {
+                const user = {
                     document,
                     password
                 }
-                this.props.getUser(usere)
+                this.props.getUser(user)
                 setTimeout("location.reload(true);",1500);
                 
             }else{

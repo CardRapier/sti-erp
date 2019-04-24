@@ -1,6 +1,5 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBCard, MDBCardBody, ToastContainer,toast } from 'mdbreact';
-import uuid from "uuid"
 import { connect } from 'react-redux';
 import { addProduct } from '../actions/productActions'
 
